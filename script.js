@@ -99,3 +99,11 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // // join method
 // console.log(arr2.join(" - "));
+
+/////
+
+// 143. the new at method
+
+// const arr3 = [1, 2, 3, 4, 5];
+// console.log(arr3.at(0)); // gives the element present at the provided index
+// console.log(arr3.at(-1));
