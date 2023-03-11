@@ -61,7 +61,7 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-////////// ---------- //////////
+////////// displays the movements of amounts //////////
 
 // this function takes the movements array
 const displayMovements = function (movements) {
@@ -87,6 +87,21 @@ const displayMovements = function (movements) {
 
 // function is called
 displayMovements(account1.movements);
+
+////////// ---------- //////////
+
+////////// sets the username for different account owners //////////
+
+const userNames = accounts.map((account) => {
+  let fullNameArr = account.owner.split(" ");
+  let userName = "";
+  fullNameArr.forEach(function (name) {
+    userName += name[0].toLowerCase();
+  });
+  return userName;
+});
+
+console.log(userNames);
 
 ////////// ---------- //////////
 
