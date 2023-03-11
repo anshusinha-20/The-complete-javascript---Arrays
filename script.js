@@ -107,3 +107,18 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // const arr3 = [1, 2, 3, 4, 5];
 // console.log(arr3.at(0)); // gives the element present at the provided index
 // console.log(arr3.at(-1));
+
+/////
+
+// 144. loooing arrays: forEach
+// console.log("---for loop---");
+// const arr4 = [1, 2, 3, 4, 5];
+// for (let [i, ele] of arr4.entries()) {
+//   console.log(`${i + 1} : ${ele}`);
+// }
+
+// console.log("---forEach loop---");
+
+// arr4.forEach(function (ele, i) {
+//   console.log(`${i + 1} : ${ele}`);
+// });
