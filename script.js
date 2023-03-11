@@ -276,3 +276,15 @@ console.log(userNames);
 // });
 
 // console.log(arr7);
+
+/////
+
+// 152. the filter method
+
+// const arr8 = [-1, 3, 5, 3, 5, 3, -4, -534, -33, 3, -343];
+
+// const arr9 = arr8.filter((i) => i > 0);
+// const arr10 = arr8.filter((i) => i < 0);
+
+// console.log(arr9);
+// console.log(arr10);
