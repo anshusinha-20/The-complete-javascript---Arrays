@@ -181,13 +181,13 @@ displayMovements(account1.movements);
 
 // 145. forEach with maps and sets
 
+// // map
 // const currencies = new Map([
 //   ["USD", "United States dollar"],
 //   ["EUR", "Euro"],
 //   ["GBP", "Pound sterling"],
 // ]);
 
-// // map
 // currencies.forEach(function (value, key, map) {
 //   console.log(`${key} : ${value}`);
 // });
@@ -240,3 +240,24 @@ displayMovements(account1.movements);
 // const kateData = [4, 1, 15, 8, 3];
 
 // checkDogs(juliaData, kateData);
+
+/////
+
+// // 150. the map method
+
+// const arr5 = [1, 2, 3, 4, 5];
+// // const arr6 = arr5.map(function (i) {
+// //   return 2 * i;
+// // });
+
+// const arr6 = arr5.map((i) => 2 * i);
+
+// console.log(arr5);
+// console.log(arr6);
+
+// const arr7 = arr6.map((i) => {
+//   const type = i > 5 ? "yes" : "no";
+//   return type;
+// });
+
+// console.log(arr7);
