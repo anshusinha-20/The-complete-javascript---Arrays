@@ -117,6 +117,33 @@ displayCurrentBalance(account1.movements);
 
 ////////// ---------- //////////
 
+////////// calculates and displays the summary of deposits, withdrawals and interest amount //////////
+
+const displaySummary = function (movements) {
+  const totalDeposits = movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumIn.textContent = `₹ ${totalDeposits}`;
+
+  const totalWithdrawals = movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumOut.textContent = `₹ ${Math.abs(totalWithdrawals)}`;
+
+  const totalInterests = movements
+    .filter((deposit) => deposit > 0)
+    .map((deposit) => deposit * 0.08)
+    .reduce((acc, deposit) => acc + deposit, 0);
+
+  labelSumInterest.textContent = `₹ ${totalInterests}`;
+};
+
+displaySummary(account1.movements);
+
+////////// ---------- //////////
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -362,3 +389,18 @@ displayCurrentBalance(account1.movements);
 // // passes dogAges array as an argument and average age is
 // // consoled out after function execution
 // console.log(calcAverageHumanAge(dogAges));
+
+/////
+
+// 155. the magic of chaining methods
+
+const movements = [1300, 70, -130, -650, 3000, -400, 450, 200];
+
+const inrToUsd = 80;
+
+const totalDepositsInUsd = movements
+  .filter((mov) => mov > 0)
+  .map((mov) => mov / inrToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalDepositsInUsd);
