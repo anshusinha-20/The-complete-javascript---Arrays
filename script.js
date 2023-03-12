@@ -105,6 +105,20 @@ console.log(userNames);
 
 ////////// ---------- //////////
 
+////////// calculates and displays the current balance //////////
+
+const displayCurrentBalance = function (movements) {
+  const currentBalance = account1.movements.reduce(function (acc, cur, i) {
+    return acc + cur;
+  }, 0);
+
+  labelBalance.textContent = `₹ ${currentBalance}`;
+};
+
+displayCurrentBalance(account1.movements);
+
+////////// ---------- //////////
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -288,3 +302,14 @@ console.log(userNames);
 
 // console.log(arr9);
 // console.log(arr10);
+
+/////
+
+// 153. the reduce method
+// const arr11 = [1, 2, 4, 5, 6, -4, 4, -33, 343];
+// const arr12 = arr11.reduce(function (acc, cur, i) {
+//   console.log(`${i} : ${acc}`);
+//   return acc + cur;
+// }, 0);
+
+// console.log(arr12);
