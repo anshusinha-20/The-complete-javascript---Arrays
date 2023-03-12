@@ -101,8 +101,6 @@ const userNames = accounts.map((account) => {
   return userName;
 });
 
-console.log(userNames);
-
 ////////// ---------- //////////
 
 ////////// calculates and displays the current balance //////////
@@ -313,3 +311,54 @@ displayCurrentBalance(account1.movements);
 // }, 0);
 
 // console.log(arr12);
+
+/////
+
+// 154. coding challenge #2
+// Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
+// Your tasks:
+// Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
+// 1. Calculatethedogageinhumanyearsusingthefollowingformula:ifthedogis <= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4
+// 2. Excludealldogsthatarelessthan18humanyearsold(whichisthesameas keeping dogs that are at least 18 years old)
+// 3. Calculatetheaveragehumanageofalladultdogs(youshouldalreadyknow from other challenges how we calculate averages 😉)
+// 4. Runthefunctionforbothtestdatasets
+// Test data:
+// § Data1:[5,2,4,1,15,8,3] § Data2:[16,6,10,5,6,1,4]
+// GOOD LUCK 😀
+
+// const calcAverageHumanAge = function (ages) {
+//   // creates humanAge array according to the specified rule
+//   const humanAge = ages.map(function (age) {
+//     const type = age <= 2 ? 2 * age : 16 + age * 4;
+//     return type;
+//   });
+
+//   // console.log(humanAge);
+
+//   // creates adultHumanAge array, where ages are filtered
+//   const adultHumanAge = humanAge.filter((ele) => ele >= 18);
+
+//   // console.log(adultHumanAge);
+
+//   // calculates the total age
+//   const totalAge = adultHumanAge.reduce(function (acc, cur) {
+//     return acc + cur;
+//   });
+
+//   // console.log(totalAge);
+
+//   // calculates the average age
+//   const avgAge = totalAge / adultHumanAge.length;
+
+//   // console.log(avgAge);
+
+//   // returns the average age
+//   return `Average age: ${avgAge}`;
+// };
+
+// // dogAges array
+// const dogAges = [5, 2, 4, 1, 15, 8, 3];
+
+// // passes dogAges array as an argument and average age is
+// // consoled out after function execution
+// console.log(calcAverageHumanAge(dogAges));
