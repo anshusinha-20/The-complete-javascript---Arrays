@@ -85,9 +85,6 @@ const displayMovements = function (movements) {
   });
 };
 
-// function is called
-displayMovements(account1.movements);
-
 ////////// ---------- //////////
 
 ////////// sets the username for different account owners //////////
@@ -98,7 +95,7 @@ const userNames = accounts.map((account) => {
   fullNameArr.forEach(function (name) {
     userName += name[0].toLowerCase();
   });
-  return userName;
+  account.userName = userName;
 });
 
 ////////// ---------- //////////
@@ -106,20 +103,16 @@ const userNames = accounts.map((account) => {
 ////////// calculates and displays the current balance //////////
 
 const displayCurrentBalance = function (movements) {
-  const currentBalance = account1.movements.reduce(function (acc, cur, i) {
-    return acc + cur;
-  }, 0);
+  const currentBalance = movements.reduce((acc, cur) => acc + cur, 0);
 
   labelBalance.textContent = `₹ ${currentBalance}`;
 };
-
-displayCurrentBalance(account1.movements);
 
 ////////// ---------- //////////
 
 ////////// calculates and displays the summary of deposits, withdrawals and interest amount //////////
 
-const displaySummary = function (movements) {
+const displaySummary = function (movements, interest) {
   const totalDeposits = movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
@@ -134,13 +127,45 @@ const displaySummary = function (movements) {
 
   const totalInterests = movements
     .filter((deposit) => deposit > 0)
-    .map((deposit) => deposit * 0.08)
+    .map((deposit) => deposit * interest)
     .reduce((acc, deposit) => acc + deposit, 0);
 
-  labelSumInterest.textContent = `₹ ${totalInterests}`;
+  labelSumInterest.textContent = `₹ ${Math.trunc(totalInterests)}`;
 };
 
-displaySummary(account1.movements);
+////////// ---------- //////////
+
+////////// implements login //////////
+
+let currentAccount;
+
+btnLogin.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    (account) => account.userName === inputLoginUsername.value
+  );
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // opacity is set to 1
+    containerApp.style.opacity = 1;
+    // welcome text is changed
+    labelWelcome.textContent = `Welcome back ${
+      currentAccount.owner.split(" ")[0]
+    }`;
+    // clears the input field
+    inputLoginUsername.value = inputLoginPin.value = "";
+    // blurrs the input fields
+    inputLoginUsername.blur();
+    inputLoginPin.blur();
+    // displayMovements function is called
+    displayMovements(currentAccount.movements);
+    // displayCurrentBalance function is called
+    displayCurrentBalance(currentAccount.movements);
+    // displaySummary function is called
+    displaySummary(currentAccount.movements, currentAccount.interestRate / 100);
+  }
+});
 
 ////////// ---------- //////////
 
