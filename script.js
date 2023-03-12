@@ -64,20 +64,20 @@ const inputClosePin = document.querySelector(".form__input--pin");
 ////////// displays the movements of amounts //////////
 
 // this function takes the movements array
-const displayMovements = function (movements) {
+const displayMovements = function (account) {
   // dom manipulation where initially the html is set to empty
   containerMovements.innerHTML = "";
   // this forEach function loops through the movements array
-  movements.forEach(function (move, i) {
+  account.movements.forEach(function (mov, i) {
     // stores the type of the amount
-    const type = move > 0 ? "deposit" : "withdrawal";
+    const type = mov > 0 ? "deposit" : "withdrawal";
     // stores the updated html
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">₹ ${move}</div>
+        <div class="movements__value">₹ ${mov}</div>
       </div>
     `;
     // dom manipulation to update the inner html
@@ -90,11 +90,16 @@ const displayMovements = function (movements) {
 ////////// sets the username for different account owners //////////
 
 const userNames = accounts.map((account) => {
+  // splits the name of the owner separated by spaces
   let fullNameArr = account.owner.split(" ");
+  // username is initially set to empty
   let userName = "";
+  // first letter of the full names are chosen and converted to lowercase
+  // and then the initials are appended to form a username
   fullNameArr.forEach(function (name) {
     userName += name[0].toLowerCase();
   });
+  // account object hold the new property called userName
   account.userName = userName;
 });
 
@@ -102,35 +107,49 @@ const userNames = accounts.map((account) => {
 
 ////////// calculates and displays the current balance //////////
 
-const displayCurrentBalance = function (movements) {
-  const currentBalance = movements.reduce((acc, cur) => acc + cur, 0);
+const displayCurrentBalance = function (account) {
+  account.balance = account.movements.reduce((acc, cur) => acc + cur, 0);
 
-  labelBalance.textContent = `₹ ${currentBalance}`;
+  labelBalance.textContent = `₹ ${account.balance}`;
 };
 
 ////////// ---------- //////////
 
 ////////// calculates and displays the summary of deposits, withdrawals and interest amount //////////
 
-const displaySummary = function (movements, interest) {
-  const totalDeposits = movements
+// calculates the total deposits
+const displaySummary = function (account) {
+  const totalDeposits = account.movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
 
   labelSumIn.textContent = `₹ ${totalDeposits}`;
-
-  const totalWithdrawals = movements
+  // calculates the total withdrawals
+  const totalWithdrawals = account.movements
     .filter((mov) => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
 
   labelSumOut.textContent = `₹ ${Math.abs(totalWithdrawals)}`;
-
-  const totalInterests = movements
+  // calculates the total interest amount
+  const totalInterests = account.movements
     .filter((deposit) => deposit > 0)
-    .map((deposit) => deposit * interest)
+    .map((deposit) => deposit * (account.interestRate / 100))
     .reduce((acc, deposit) => acc + deposit, 0);
 
   labelSumInterest.textContent = `₹ ${Math.trunc(totalInterests)}`;
+};
+
+////////// ---------- //////////
+
+////////// function to update the UI //////////
+
+const updateUi = function (account) {
+  // displayMovements function is called
+  displayMovements(account);
+  // displayCurrentBalance function is called
+  displayCurrentBalance(account);
+  // displaySummary function is called
+  displaySummary(account);
 };
 
 ////////// ---------- //////////
@@ -140,6 +159,7 @@ const displaySummary = function (movements, interest) {
 let currentAccount;
 
 btnLogin.addEventListener("click", function (e) {
+  // prevents the page from reloading
   e.preventDefault();
 
   currentAccount = accounts.find(
@@ -158,12 +178,34 @@ btnLogin.addEventListener("click", function (e) {
     // blurrs the input fields
     inputLoginUsername.blur();
     inputLoginPin.blur();
-    // displayMovements function is called
-    displayMovements(currentAccount.movements);
-    // displayCurrentBalance function is called
-    displayCurrentBalance(currentAccount.movements);
-    // displaySummary function is called
-    displaySummary(currentAccount.movements, currentAccount.interestRate / 100);
+
+    // updates the UI
+    updateUi(currentAccount);
+  }
+});
+
+////////// ---------- //////////
+
+////////// implements transfers //////////
+
+btnTransfer.addEventListener("click", function (e) {
+  e.preventDefault();
+  // transfer amount
+  const transferAmount = Number(inputTransferAmount.value);
+  // receiver account details
+  const receiverAccount = accounts.find(
+    (account) => account.userName === inputTransferTo.value
+  );
+
+  if (
+    transferAmount > 0 &&
+    currentAccount.balance >= transferAmount &&
+    receiverAccount?.userName !== currentAccount.userName
+  ) {
+    currentAccount.movements.push(-transferAmount);
+    receiverAccount.movements.push(transferAmount);
+    // updates the UI
+    updateUi(currentAccount);
   }
 });
 
