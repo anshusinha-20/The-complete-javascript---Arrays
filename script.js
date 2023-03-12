@@ -6,31 +6,31 @@
 
 // Data
 const account1 = {
-  owner: "Jonas Schmedtmann",
+  owner: "Ramesh Kumar Sinha",
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-  interestRate: 1.2, // %
-  pin: 1111,
+  interestRate: 8.7, // %
+  pin: 1010,
 };
 
 const account2 = {
-  owner: "Jessica Davis",
+  owner: "Madhuri Sinha",
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-  interestRate: 1.5,
-  pin: 2222,
+  interestRate: 9.0,
+  pin: 2020,
 };
 
 const account3 = {
-  owner: "Steven Thomas Williams",
+  owner: "Anshu Sinha",
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
-  interestRate: 0.7,
-  pin: 3333,
+  interestRate: 8.2,
+  pin: 3030,
 };
 
 const account4 = {
-  owner: "Sarah Smith",
+  owner: "Sahil Kumar Sinha",
   movements: [430, 1000, 700, 50, 90],
-  interestRate: 1,
-  pin: 4444,
+  interestRate: 8.5,
+  pin: 4040,
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -422,3 +422,14 @@ displaySummary(account1.movements);
 // const dogAges = [5, 2, 4, 1, 15, 8, 3];
 
 // console.log(`Average age: ${calcAverageHumanAge(dogAges)}`);
+
+/////
+
+// 157. the find method
+
+// const movements = [1300, 70, -130, -650, 3000, -400, 450, 200];
+// const firstDeposit = movements.find((mov) => mov > 0);
+// console.log(firstDeposit);
+
+// const account = accounts.find((acc) => acc.owner === "Anshu Sinha");
+// console.log(account);
