@@ -16,9 +16,9 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  color: #444;
-  background-color: #f3f3f3;
+  font-family: 'Nunito', sans-serif;
+  color: #000000;
+  background-color: #caf0f8;
   height: 100vh;
   padding: 2rem;
 }
@@ -31,12 +31,12 @@ nav {
 }
 
 .welcome {
-  font-size: 1.9rem;
+  font-size: 2.2rem;
   font-weight: 500;
 }
 
 .logo {
-  height: 5.25rem;
+  height: 5.5rem;
 }
 
 .login {
@@ -46,7 +46,7 @@ nav {
 .login__input {
   border: none;
   padding: 0.5rem 2rem;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-family: inherit;
   text-align: center;
   width: 12rem;
@@ -59,7 +59,7 @@ nav {
 
 .login__input:focus {
   outline: none;
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff;
 }
 
 .login__input::placeholder {
@@ -69,7 +69,7 @@ nav {
 .login__btn {
   border: none;
   background: none;
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   color: inherit;
   cursor: pointer;
   transition: all 0.3s;
@@ -80,7 +80,7 @@ nav {
 .btn--sort:hover,
 .btn--sort:focus {
   outline: none;
-  color: #777;
+  color: #48cae4;
 }
 
 /* MAIN */
@@ -94,7 +94,7 @@ nav {
   gap: 2rem;
 
   /* NOTE This creates the fade in/out anumation */
-  opacity: 0;
+  /* opacity: 0; */
   transition: all 1s;
 }
 
@@ -107,7 +107,7 @@ nav {
 }
 
 .balance__label {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 500;
   margin-bottom: -0.2rem;
 }
@@ -155,11 +155,11 @@ nav {
 }
 
 .movements__type--deposit {
-  background-image: linear-gradient(to top left, #39b385, #9be15d);
+  background-image: linear-gradient(to top left, #0061ff, #60efff);
 }
 
 .movements__type--withdrawal {
-  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+  background-image: linear-gradient(to top left, #ff0f7b, #f89b29);
 }
 
 .movements__value {
@@ -190,11 +190,11 @@ nav {
 
 .summary__value--in,
 .summary__value--interest {
-  color: #66c873;
+  color: #0061ff;
 }
 
 .summary__value--out {
-  color: #f5465d;
+  color: #ff0f7b;
 }
 
 .btn--sort {
@@ -214,15 +214,15 @@ nav {
 }
 
 .operation--transfer {
-  background-image: linear-gradient(to top left, #ffb003, #ffcb03);
+  background-image: linear-gradient(to top left, #ff930f, #fff95b);
 }
 
 .operation--loan {
-  background-image: linear-gradient(to top left, #39b385, #9be15d);
+  background-image: linear-gradient(to top left, #12DFF3, #AFFCAF);
 }
 
 .operation--close {
-  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+  background-image: linear-gradient(to top left, #e60b09, #ff0f7b);
 }
 
 h2 {
