@@ -150,6 +150,15 @@ const updateUi = function (account) {
   displayCurrentBalance(account);
   // displaySummary function is called
   displaySummary(account);
+  // clears the input fields
+  inputLoginUsername.value =
+    inputLoginPin.value =
+    inputTransferTo.value =
+    inputTransferAmount.value =
+    inputLoanAmount.value =
+    inputCloseUsername.value =
+    inputClosePin.value =
+      "";
 };
 
 ////////// ---------- //////////
@@ -170,11 +179,9 @@ btnLogin.addEventListener("click", function (e) {
     // opacity is set to 1
     containerApp.style.opacity = 1;
     // welcome text is changed
-    labelWelcome.textContent = `Welcome back ${
+    labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(" ")[0]
     }`;
-    // clears the input field
-    inputLoginUsername.value = inputLoginPin.value = "";
     // blurrs the input fields
     inputLoginUsername.blur();
     inputLoginPin.blur();
@@ -202,10 +209,58 @@ btnTransfer.addEventListener("click", function (e) {
     currentAccount.balance >= transferAmount &&
     receiverAccount?.userName !== currentAccount.userName
   ) {
+    // deducts transfer amount from the current account
     currentAccount.movements.push(-transferAmount);
+    // adds transfer amount to the receiver account
     receiverAccount.movements.push(transferAmount);
     // updates the UI
     updateUi(currentAccount);
+  }
+});
+
+////////// ---------- //////////
+
+////////// implements loan request //////////
+
+btnLoan.addEventListener("click", function (e) {
+  e.preventDefault();
+  // loan amount
+  const loanAmount = Number(inputLoanAmount.value);
+
+  if (
+    loanAmount > 0 &&
+    currentAccount.movements.some((mov) => mov > loanAmount * 0.1)
+  ) {
+    // adds the loan amount to the current account
+    currentAccount.movements.push(loanAmount);
+    // updates the UI
+    updateUi(currentAccount);
+  }
+});
+
+////////// ---------- //////////
+
+////////// implements account close //////////
+
+btnClose.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.userName &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    // finds the index of the account to be closed
+    const index = accounts.findIndex(
+      (account) => account.userName === currentAccount.userName
+    );
+    // deletes the account
+    accounts.splice(index, 1);
+
+    // hides the UI
+    containerApp.style.opacity = 0;
+
+    // welcome text is changed
+    labelWelcome.textContent = "Log in to get started";
   }
 });
 
@@ -500,3 +555,18 @@ btnTransfer.addEventListener("click", function (e) {
 
 // const account = accounts.find((acc) => acc.owner === "Anshu Sinha");
 // console.log(account);
+
+/////
+
+// 161. some and every
+
+// // some method
+// const movements = [1300, 70, -130, -650, 3000, -400, 450, 200];
+// //checks for equality
+// console.log(movements.includes(90));
+// // checks for condition, i.e, if any movements is greater than 90
+// console.log(movements.some((mov) => mov > 90));
+
+// // every method
+// // checks for condition, i.e, if every movement is greater than 100
+// console.log(movements.every((mov) => mov > 100));
