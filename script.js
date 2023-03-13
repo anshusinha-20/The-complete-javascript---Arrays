@@ -570,3 +570,30 @@ btnClose.addEventListener("click", function (e) {
 // // every method
 // // checks for condition, i.e, if every movement is greater than 100
 // console.log(movements.every((mov) => mov > 100));
+
+/////
+
+// 162. flat and flatMap
+
+// // flat
+// const arr13 = [[1, 2, 3], 4, 5, [6, 7]];
+// console.log(arr13.flat());
+
+// // flat with arguements method goes more than one level deep when flatening an array
+// const arrDeep = [1, 2, 3, [4, [5, 6, [7, 8]]]];
+// console.log(arrDeep.flat(3));
+
+// // calculating the overall balance of all the accounts
+// const overallBalance = accounts
+//   .map((account) => account.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+
+// console.log(overallBalance);
+
+// // flatMap - combines flat and map method into one method
+// // Nots: flatMap doesn't go more than one level deep
+// const overallBalance2 = accounts
+//   .flatMap((account) => account.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance2);
