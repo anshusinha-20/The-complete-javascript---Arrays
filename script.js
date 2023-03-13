@@ -64,11 +64,16 @@ const inputClosePin = document.querySelector(".form__input--pin");
 ////////// displays the movements of amounts //////////
 
 // this function takes the movements array
-const displayMovements = function (account) {
+const displayMovements = function (account, sorted) {
   // dom manipulation where initially the html is set to empty
   containerMovements.innerHTML = "";
-  // this forEach function loops through the movements array
-  account.movements.forEach(function (mov, i) {
+
+  // replicated movements array to preserve the original array after sort
+  const movs = sorted
+    ? account.movements.slice().sort((a, b) => a - b)
+    : account.movements;
+  // this forEach function loops through the movs array
+  movs.forEach(function (mov, i) {
     // stores the type of the amount
     const type = mov > 0 ? "deposit" : "withdrawal";
     // stores the updated html
@@ -262,6 +267,17 @@ btnClose.addEventListener("click", function (e) {
     // welcome text is changed
     labelWelcome.textContent = "Log in to get started";
   }
+});
+
+////////// ---------- //////////
+
+////////// implements sorting of account movements //////////
+
+let sorted = false;
+btnSort.addEventListener("click", function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount, !sorted);
+  sorted = !sorted;
 });
 
 ////////// ---------- //////////
@@ -597,3 +613,24 @@ btnClose.addEventListener("click", function (e) {
 //   .flatMap((account) => account.movements)
 //   .reduce((acc, mov) => acc + mov, 0);
 // console.log(overallBalance2);
+
+/////
+
+// 163. sorting arrays
+
+// // sort - sorts and mutates the original array
+// const arr14 = ["Alex", "Anya", "Anshu", "Adam"];
+// console.log(arr14.sort());
+// console.log(arr14);
+
+// // sorting arrays with numbers
+// const movements = account1.movements;
+// console.log(movements);
+
+// // ascending order
+// movements.sort((a, b) => a - b);
+// console.log(movements);
+
+// // descending order
+// movements.sort((a, b) => b - a);
+// console.log(movements);
